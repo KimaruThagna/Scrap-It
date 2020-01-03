@@ -6,3 +6,23 @@ url_to_web = 'https://en.wikipedia.org/wiki/List_of_sovereign_states_and_depende
 # view the data from requests
 data = requests.get(url_to_web)
 print(f'Data from provided url\n {data.content}')
+# if succesful, parse results to beautifulsoup for further processing
+soup_obj = ''
+if data.status_code == 200:
+    soup_obj = BeautifulSoup(data.content, "html.parser")
+
+# find table by html class name
+table = soup_obj.find('table',{'class':'wikitable sortable'})
+
+new_table = []
+for row in table.find_all('tr')[1:]:
+    column_marker = 0
+    columns = row.find_all('td')
+    new_table.append([column.get_text() for column in columns])
+
+print(f'View scrapped table\n {new_table}')
+# convert the list of lists to pd dataframe
+
+df = pd.DataFrame(new_table, columns=['ContinentCode','Alpha2','Alpha3','PhoneCode','Name'])
+df['Name'] = df['Name'].str.replace('\n','') # cleaning
+print(df)
