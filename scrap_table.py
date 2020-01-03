@@ -12,12 +12,12 @@ if data.status_code == 200:
     soup_obj = BeautifulSoup(data.content, "html.parser")
 
 # find table by html class name
-table = soup_obj.find('table',{'class':'wikitable sortable'})
+table = soup_obj.find('table',{'class':'wikitable sortable'}) # search element of type table and class wikitable sortable
 
 new_table = []
 for row in table.find_all('tr')[1:]:
     column_marker = 0
-    columns = row.find_all('td')
+    columns = row.find_all('td')# individual cell per row
     new_table.append([column.get_text() for column in columns])
 
 print(f'View scrapped table\n {new_table}')
@@ -26,3 +26,5 @@ print(f'View scrapped table\n {new_table}')
 df = pd.DataFrame(new_table, columns=['ContinentCode','Alpha2','Alpha3','PhoneCode','Name'])
 df['Name'] = df['Name'].str.replace('\n','') # cleaning
 print(df)
+pandas_result =  pd.read_html(url_to_web)
+print(f'Dataframe using pandas.read_html\n{pandas_result[2]}')
