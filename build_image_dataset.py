@@ -1,6 +1,6 @@
 import os
 from fetch_image_urls import download, fetch_img_urls
-
+from selenium import webdriver
 def search_and_download(query ,driver_path, target_path='./images' ,number_images=5):
     target_folder = os.path.join(target_path ,'_'.join(query.lower().split(' ')))
 
