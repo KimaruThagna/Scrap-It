@@ -1,4 +1,4 @@
-import requests
+import requests, selenium
 import pandas as pd
 from bs4 import BeautifulSoup
 
@@ -28,3 +28,4 @@ df['Name'] = df['Name'].str.replace('\n','') # cleaning
 print(df)
 pandas_result =  pd.read_html(url_to_web)
 print(f'Dataframe using pandas.read_html\n{pandas_result[2]}')
+
