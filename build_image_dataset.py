@@ -13,4 +13,3 @@ def search_and_download(query ,driver_path, target_path='IMG_DATASET' ,number_im
     for url in response:
         download(target_folder ,url)
 selenium_driver_path = '/home/macbuntu/Desktop/chromedriver_linux64/chromedriver'
-search_and_download('bus', driver_path = selenium_driver_path)
