@@ -10,8 +10,3 @@ if query and max_size != 0.00:
     st.write('Downloading...')
     search_and_download(query, driver_path = selenium_driver_path, target_path='IMG_DATASET',number_images=max_size)
     st.write(f'Download complete! Check the IMG_DATASET folder')
-#
-# # user may want to see a sample image
-# if st.checkbox('Show sample Image from downloaded dataset'):
-#     img = ''
-#     st.image(img,caption='Sample image' )
