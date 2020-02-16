@@ -32,3 +32,8 @@ for row in soup.find_all('tbody'):
             totalVolumes.append(volume.text)
         for openInterest in srow.find_all('td', attrs={'class':'data-col7'}):
             openInterests.append(openInterest.text)
+yahoo_data = pd.DataFrame({"Names": names, "Prices": prices, "Change": changes,
+                           "% Change": percentChanges, "Market Time": marketTimes,
+                           'Open Interest': openInterests ,"Volume": totalVolumes})
+
+print(yahoo_data.head())
