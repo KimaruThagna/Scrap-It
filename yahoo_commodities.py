@@ -16,9 +16,9 @@ r= requests.get(url)
 data=r.text
 soup=BeautifulSoup(data)
 
-for row in soup.find_all('tbody'):
-    for srow in row.find_all('tr'):
-        for name in srow.find_all('td', attrs={'class':'data-col1'}):
+for row in soup.find_all('tbody'):# all tables
+    for srow in row.find_all('tr'): # find each row in each table
+        for name in srow.find_all('td', attrs={'class':'data-col1'}): # find specific cells
             names.append(name.text)
         for price in srow.find_all('td', attrs={'class':'data-col2'}):
             prices.append(price.text)
@@ -36,4 +36,4 @@ yahoo_data = pd.DataFrame({"Names": names, "Prices": prices, "Change": changes,
                            "% Change": percentChanges, "Market Time": marketTimes,
                            'Open Interest': openInterests ,"Volume": totalVolumes})
 
-print(yahoo_data.head())
+yahoo_data.to_csv("commodities.csv", index=None)
